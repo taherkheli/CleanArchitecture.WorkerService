@@ -1,9 +1,7 @@
+using CleanArchitecture.Core.Interfaces;
+using CleanArchitecture.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.WorkerService
 {
@@ -18,6 +16,7 @@ namespace CleanArchitecture.WorkerService
 				Host.CreateDefaultBuilder(args)
 						.ConfigureServices((hostContext, services) =>
 						{
+							services.AddSingleton(typeof(ILoggerAdapter<>), typeof(LoggerAdapter<>));
 							services.AddHostedService<Worker>();
 						});
 	}
